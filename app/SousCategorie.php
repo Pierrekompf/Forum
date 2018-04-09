@@ -10,6 +10,10 @@ class SousCategorie extends Model
 
     public function messages()
     {
-        return $this->hasMany('App\Message');
+        return $this->hasMany(Message::class);
     }
+
+   /* public function categorie() {
+        return $this->belongsTo(Categorie::class);
+    }*/
 }
