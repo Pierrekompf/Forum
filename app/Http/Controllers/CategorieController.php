@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Laravel\Tinker\ClassAliasAutoloader;
 
 class CategorieController extends Controller
 {
@@ -41,7 +42,7 @@ class CategorieController extends Controller
 
         $category->save();
 
-        return redirect()->route('mescategories');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -63,7 +64,7 @@ class CategorieController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('categorie.view', ['categorie' => $category]);
+        return view('categorie.edit', ['categorie' => $category]);
     }
 
     /**
@@ -75,7 +76,12 @@ class CategorieController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $categoryone = Category::find($category->id);
+        $categoryone->name = $request->input('name');
+
+        $categoryone->save();
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -86,6 +92,8 @@ class CategorieController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        Category::destroy($category->id);
+
+        return redirect()->route('categories.index');
     }
 }

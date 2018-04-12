@@ -39,7 +39,8 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li><a class="nav-link" href="{{ route('mescategories') }}">Catégories</a></li>
+                        <li><a class="nav-link" href="{{ route('categories.index') }}">Catégories</a></li>
+                        <li><a class="nav-link" href="{{ route('souscategories.index') }}">Sous-Catégories</a></li>
                         <!-- Authentication Links -->
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>

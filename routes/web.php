@@ -20,11 +20,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('categories', 'CategorieController');
+Route::resource('souscategories', 'SousCategorieController');
 Route::resource('messages', 'MessageController');
 
-Route::middleware('auth')->group(function () {
-//    Route::resource('categories', 'CategorieController', [
-//        'only' => ['create', 'update'],
-//    ]);
-    Route::get('/mes-categories', 'CategorieController@index')->name('mescategories');
-});
+//Route::middleware('auth')->group(function () {
+////    Route::resource('categories', 'CategorieController', [
+////        'only' => ['create', 'update'],
+////    ]);
+//    Route::get('/mes-categories', 'CategorieController@index')->name('mescategories');
+//});

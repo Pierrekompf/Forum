@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\SousCategorie;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class SousCategorieController extends Controller
      */
     public function index()
     {
-        //
+        $sousCategories = SousCategorie::all();
+
+        return view('souscategorie.index', ['souscategories' => $sousCategories]);
     }
 
     /**
@@ -24,7 +27,8 @@ class SousCategorieController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('souscategorie.create', ['categories' => $categories]);
     }
 
     /**
@@ -35,18 +39,25 @@ class SousCategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $souscategory = new SousCategorie();
+        $souscategory->name = $request->input('name');
+        $souscategory->categorie_id = $request->input('categorie');
+
+        $souscategory->save();
+
+        return redirect()->route('souscategories.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\SousCategorie  $sousCategorie
+     * @param  \App\SousCategorie  $sousCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(SousCategorie $sousCategorie)
+    public function show(SousCategorie $sousCategory)
     {
-        //
+//        $category = Category::
+        return view('souscategorie.view', ['souscategorie' => $sousCategory]);
     }
 
     /**
@@ -57,7 +68,8 @@ class SousCategorieController extends Controller
      */
     public function edit(SousCategorie $sousCategorie)
     {
-        //
+        return view('souscategorie.edit', ['souscategorie' => $sousCategorie]);
+
     }
 
     /**
@@ -78,8 +90,9 @@ class SousCategorieController extends Controller
      * @param  \App\SousCategorie  $sousCategorie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SousCategorie $sousCategorie)
+    public function destroy(SousCategorie $souscategorie)
     {
-        //
+        SousCategorie::destroy($souscategorie->id);
+        return var_dump($souscategorie->id);
     }
 }
