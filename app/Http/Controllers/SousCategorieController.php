@@ -34,7 +34,7 @@ class SousCategorieController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,48 +51,55 @@ class SousCategorieController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\SousCategorie  $sousCategory
+     * @param  \App\SousCategorie $sousCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(SousCategorie $sousCategory)
+    public function show($sousCategory)
     {
-//        $category = Category::
+        $sousCategory = SousCategorie::find($sousCategory);
         return view('souscategorie.view', ['souscategorie' => $sousCategory]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\SousCategorie  $sousCategorie
+     * @param  \App\SousCategorie $sousCategorie
      * @return \Illuminate\Http\Response
      */
-    public function edit(SousCategorie $sousCategorie)
+    public function edit($sousCategorie)
     {
-        return view('souscategorie.edit', ['souscategorie' => $sousCategorie]);
+        $sousCategorie = SousCategorie::find($sousCategorie);
+        $categories = Category::all();
+        return view('souscategorie.edit', ['souscategorie' => $sousCategorie, 'categories' => $categories]);
 
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SousCategorie  $sousCategorie
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\SousCategorie $sousCategorie
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, SousCategorie $sousCategorie)
     {
-        //
+        $sousCategorie->name = $request->input('name');
+        $sousCategorie->categorie_id = $request->input('categorie');
+
+        $sousCategorie->save();
+
+        return redirect()->route('souscategories.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SousCategorie  $sousCategorie
+     * @param  \App\SousCategorie $sousCategorie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SousCategorie $souscategorie)
+    public function destroy($souscategorie)
     {
-        SousCategorie::destroy($souscategorie->id);
-        return var_dump($souscategorie->id);
+        SousCategorie::destroy($souscategorie);
+        return redirect()->route('souscategories.index');
     }
 }

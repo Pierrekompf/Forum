@@ -2,6 +2,6 @@
 
 @section('content')
     <div>
-        <p>{{ $souscategorie }}</p>
+        <p>{{ $souscategorie->name }}</p>
     </div>
 @endsection
