@@ -81,8 +81,9 @@ class SousCategorieController extends Controller
      * @param  \App\SousCategorie $sousCategorie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SousCategorie $sousCategorie)
+    public function update(Request $request, $sousCategorie)
     {
+        $sousCategorie = SousCategorie::find($sousCategorie);
         $sousCategorie->name = $request->input('name');
         $sousCategorie->categorie_id = $request->input('categorie');
 
