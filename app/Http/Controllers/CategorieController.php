@@ -8,6 +8,7 @@ use Laravel\Tinker\ClassAliasAutoloader;
 
 class CategorieController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
