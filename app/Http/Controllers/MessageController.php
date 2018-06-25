@@ -14,7 +14,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        return view('message.create');
     }
 
     /**
@@ -24,7 +24,7 @@ class MessageController extends Controller
      */
     public function create()
     {
-        //
+        return view('message.create');
     }
 
     /**
@@ -35,7 +35,13 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = new Message();
+        $message->text = $request->input('text');
+
+        $message->save();
+
+        return redirect()->route('souscategories.index');
+
     }
 
     /**
@@ -46,7 +52,9 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        return view('message.view', ['message'=>$message]);
+//        return view('message.view', ['message'=>$message]);
+        return redirect()->route('souscategories.index');
+
     }
 
     /**
@@ -57,7 +65,8 @@ class MessageController extends Controller
      */
     public function edit(Message $message)
     {
-        //
+        return redirect()->route('souscategories.index');
+
     }
 
     /**
@@ -69,7 +78,7 @@ class MessageController extends Controller
      */
     public function update(Request $request, Message $message)
     {
-        //
+        return redirect()->route('souscategories.index');
     }
 
     /**
@@ -80,6 +89,7 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        //
+        return redirect()->route('souscategories.index');
+
     }
 }
