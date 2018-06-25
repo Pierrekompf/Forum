@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('message.store') }}" method="post">
+    <form action="{{ route('messages.store', $sousCategorie) }}" method="post">
         {{ csrf_field() }}
         <div>
-            <label for="text">Text</label>
-            <input type="text" name="text">
+            <label for="texte">Text</label>
+            <input type="text" name="texte">
         </div>
         <input type="submit" name="valider" placeholder="valider">
     </form>

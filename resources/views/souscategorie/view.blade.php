@@ -9,7 +9,14 @@
                     <div class="card-header">{{ $category->name }} - {{ $souscategorie->name }}</div>
 
                     <div class="card-body">
-                        <a href="">Ajouter un message</a>
+                        <ul>
+                            @foreach($souscategorie->messages as $message)
+                                <li>
+                                    {{$message->texte}}
+                                </li>
+                            @endforeach
+                        </ul>
+                        <a href="{{ route('messages.create', ['sousCategorie' => $souscategorie->id])  }}">Ajouter un message</a>
                     </div>
                 </div>
             </div>

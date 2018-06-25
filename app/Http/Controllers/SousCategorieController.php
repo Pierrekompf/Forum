@@ -54,8 +54,9 @@ class SousCategorieController extends Controller
      * @param  \App\SousCategorie $sousCategory
      * @return \Illuminate\Http\Response
      */
-    public function show($sousCategory)
+    public function show(Request $request, $sousCategory)
     {
+
         $sousCategory = SousCategorie::find($sousCategory);
         $category = Category::find($sousCategory->categorie_id);
         return view('souscategorie.view', ['souscategorie' => $sousCategory, 'category' => $category]);

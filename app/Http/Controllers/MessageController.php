@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Message;
+use App\SousCategorie;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -12,9 +13,9 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(SousCategorie $sousCategorie)
     {
-        return view('message.create');
+        return view('message.create', ['sousCategorie' => $sousCategorie]);
     }
 
     /**
@@ -22,9 +23,9 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, SousCategorie $sousCategorie)
     {
-        return view('message.create');
+        return view('message.create', ['sousCategorie' => $sousCategorie]);
     }
 
     /**
@@ -33,11 +34,12 @@ class MessageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, SousCategorie $sousCategorie)
     {
         $message = new Message();
-        $message->text = $request->input('text');
-
+        $message->texte = $request->input('texte');
+        $message->user_id = auth()->user()->id;
+        $message->sous_categorie_id = $sousCategorie->id;
         $message->save();
 
         return redirect()->route('souscategories.index');

@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +23,8 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::resource('categories', 'CategorieController');
 Route::resource('souscategories', 'SousCategorieController');
 Route::resource('messages', 'MessageController');
+Route::get('messages/create/{sousCategorie}', "messageController@create")->name('messages.create');
+Route::post('messages/store/{sousCategorie}', "messageController@store")->name('messages.store');
 
 //Route::middleware('auth')->group(function () {
 ////    Route::resource('categories', 'CategorieController', [
