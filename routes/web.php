@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +12,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('index');
+//});
+
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::resource('categories', 'CategorieController');
+Route::resource('souscategories', 'SousCategorieController');
+Route::resource('messages', 'MessageController');
+Route::get('messages/create/{sousCategorie}', "messageController@create")->name('messages.create');
+Route::post('messages/store/{sousCategorie}', "messageController@store")->name('messages.store');
+
+//Route::middleware('auth')->group(function () {
+////    Route::resource('categories', 'CategorieController', [
+////        'only' => ['create', 'update'],
+////    ]);
+//    Route::get('/mes-categories', 'CategorieController@index')->name('mescategories');
+//});
